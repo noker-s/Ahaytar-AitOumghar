@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "C/C++: Build with SDL2",
+      "command": "/bin/bash",
+      "args": [
+        "-c",
+        "g++ -g ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/main -I${workspaceFolder}/headers -lSDL2 -lSDL2_image -lSDL2_ttf -std=c++17"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Build all .cpp files in workspace and link SDL2"
+    }
+  ]
+}
