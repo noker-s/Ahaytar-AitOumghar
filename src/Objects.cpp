@@ -16,7 +16,6 @@ Object::Object(SDL_Renderer* renderer, const std::string& type, int x, int y)
 
 Object::~Object() { SDL_DestroyTexture(texture); }
 
-// Move constructor: Transfers ownership of resources from 'other' to 'this'
 Object::Object(Object&& other) noexcept
     : texture(other.texture),  // Steal the texture pointer
       x(other.x),
@@ -25,7 +24,6 @@ Object::Object(Object&& other) noexcept
     other.texture = nullptr;  // Prevent 'other' from deleting the texture
 }
 
-// Move assignment operator: Transfers ownership like the move constructor
 Object& Object::operator=(Object&& other) noexcept {
     if (this != &other) {             // Prevent self-assignment
         SDL_DestroyTexture(texture);  // Free existing texture
@@ -42,8 +40,7 @@ Object& Object::operator=(Object&& other) noexcept {
 }
 
 void Object::render(SDL_Renderer* renderer, int scrollOffset) {
-    if (!texture)
-        return;  // Add this check to prevent rendering with a null texture!
+    if (!texture) return;  // prevent rendering with a null texture!
     int screenX = x - scrollOffset;
     if (screenX > -50 && screenX < 640) {
         // Only render if within screen bounds

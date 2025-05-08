@@ -1,6 +1,6 @@
 #include "AboutScreen.hpp"
 
-#include <vector>
+#include <vector>  // For dynamic line storage
 
 #include "Utils.hpp"
 
@@ -32,9 +32,7 @@ void AboutScreen::render(SDL_Renderer* renderer) {
     SDL_RenderCopy(renderer, background, nullptr, nullptr);
     SDL_Color white = {255, 255, 255, 255};
 
-    // Define the area for the transparent background
-    SDL_Rect textBackgroundRect = {280, 130, 120,
-                                   210};  // Adjust x, y, w, h as needed
+    SDL_Rect textBackgroundRect = {280, 130, 120, 210};
 
     // Use a vector to dynamically store lines
     std::vector<std::string> lines;
@@ -57,15 +55,13 @@ void AboutScreen::render(SDL_Renderer* renderer) {
     long unsigned int startY =
         textBackgroundRect.y + (textBackgroundRect.h - totalHeight) /
                                    2;  // Center text within the black box
-    for (long unsigned int i = 0; i < lines.size();
-         ++i) {                          // Loop through the vector
+    for (long unsigned int i = 0; i < lines.size(); ++i) {
         if (lines[i].empty()) continue;  // Skip rendering empty lines
         SDL_Texture* textTexture = renderText(renderer, font, lines[i],
                                               white);  // Access vector element
         int w, h;
         SDL_QueryTexture(textTexture, nullptr, nullptr, &w,
                          &h);  // Get text dimensions
-        // Center each line horizontally within the textBackgroundRect
         SDL_Rect textRect = {
             textBackgroundRect.x + (textBackgroundRect.w - w) / 2,
             static_cast<int>(startY + i * lineHeight), w, h};

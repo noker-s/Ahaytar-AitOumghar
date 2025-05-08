@@ -13,8 +13,8 @@ Bike::Bike(SDL_Renderer* renderer)
       isJumping(false),
       rightPressed(false) {
     for (int i = 1; i <= 9; ++i) {
-        std::string path =
-            "assets/images/Player/Player" + std::to_string(i) + ".png";
+        std::string path = "assets/images/Player/Player" + std::to_string(i) +
+                           ".png";  // Adjusted path
         animationFrames.push_back(loadTexture(renderer, path));
     }
 }

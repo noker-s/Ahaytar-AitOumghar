@@ -3,8 +3,6 @@
 #include "Game.hpp"  // Include the Game class header
 #include "Utils.hpp"
 
-// Ensure the Game class is properly included
-
 WinScreen::WinScreen(SDL_Renderer* renderer, TTF_Font* font) : font(font) {
     background =
         loadTexture(renderer, "assets/images/GameWin&Lose/GameWinbg.png");

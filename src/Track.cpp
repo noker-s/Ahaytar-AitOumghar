@@ -28,7 +28,7 @@ void Track::render(SDL_Renderer* renderer, int scrollOffset) {
     }
     int finishX = 2900 - scrollOffset;
     int finishY = 250;
-    // Adjusted finishY to match startY
+    // finishY to match startY
     if (finishX > -100 && finishX < 640) {
         SDL_Rect finishRect = {finishX, finishY, 310, 280};  // Increased size
         SDL_RenderCopy(renderer, finishSign, nullptr, &finishRect);

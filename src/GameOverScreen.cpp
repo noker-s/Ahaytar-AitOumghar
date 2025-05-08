@@ -4,9 +4,14 @@
 
 GameOverScreen::GameOverScreen(SDL_Renderer* renderer, TTF_Font* font)
     : font(font) {
-    background =
-        loadTexture(renderer, "assets/images/GameWin&Lose/GameOverbg.png");
-    overlay = loadTexture(renderer, "assets/images/GameWin&Lose/Game Over.png");
+    background = loadTexture(
+        renderer,
+        "assets/images/GameWin&Lose/GameOverbg.png");  // Load the background
+                                                       // texture
+    overlay = loadTexture(
+        renderer,
+        "assets/images/GameWin&Lose/Game Over.png");  // Load the overlay
+                                                      // texture
 }
 
 GameOverScreen::~GameOverScreen() {
@@ -32,10 +37,11 @@ void GameOverScreen::render(SDL_Renderer* renderer) {
 void GameOverScreen::handleInput(SDL_Event& event, GameState& state,
                                  Game& game) {
     if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == SDLK_RETURN) {
+        if (event.key.keysym.sym == SDLK_RETURN) {  // Restart the game
             game.reset();
             state = PLAYING;
-        } else if (event.key.keysym.sym == SDLK_ESCAPE) {
+        } else if (event.key.keysym.sym ==
+                   SDLK_ESCAPE) {  // Go back to the menu
             state = MENU;
         }
     }

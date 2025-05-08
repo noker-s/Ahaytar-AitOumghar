@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-#include <algorithm>
+#include <algorithm>  // For std::max and std::min
 #include <iostream>
-#include <memory> // For std::unique_ptr
+#include <memory>  // For std::unique_ptr
 
 #include "Menu.hpp"
 #include "Utils.hpp"
@@ -10,11 +10,12 @@
 Game::Game(SDL_Renderer* renderer, TTF_Font* font)
     : track(renderer),
       bike(std::make_unique<Bike>(renderer)),  // Initialize with renderer
+      // Use unique_ptr for dynamic management
       scrollOffset(0),
       timer(30.0f),
       gameOver(false),
-      win(false), 
-      font(font), 
+      win(false),
+      font(font),
       renderer(renderer) {  // Store renderer for reset
     objects.push_back(Object(renderer, "fallentree1", 470, 350));
     objects.push_back(Object(renderer, "fallentree2", 710, 350));
@@ -34,7 +35,12 @@ void Game::update(float deltaTime) {
     if (gameOver || win) return;
     bike->update(deltaTime);  // Access via arrow operator
     scrollOffset =
-        std::max(0, std::min(static_cast<int>(bike->getX() - 320), 3000 - 640));
+        std::max(0, std::min(static_cast<int>(bike->getX() - 320),
+                             3000 - 640));  // Adjusted to prevent overscroll
+    // Prevent overscroll
+    // Check for collisions with objects
+    // Assuming objects is a vector of Object instances
+    // and bike is a pointer to the Bike instance
     SDL_Rect bikeRect = bike->getRect();
     for (const auto& obj : objects) {
         SDL_Rect objRect = obj.getRect();
